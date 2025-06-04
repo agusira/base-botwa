@@ -10,7 +10,7 @@ import pino from "pino";
 import Serialize from "./lib/serialize.js";
 import Handler from "./src/handler.js";
 
-const logger = pino({ level: "silent", stream: "store" });
+const logger = pino({ level: "silent" });
 const { state, saveCreds } = await useMultiFileAuthState("./session");
 const store = makeInMemoryStore(logger)
 
@@ -23,7 +23,7 @@ class StartConnection {
   constructor() {
     this.sock = makeWASocket({
       printQRInTerminal: false,
-      logger: pino({ level: "silent" }),
+      logger: logger,
       browser: Browsers.macOS("Chrome"),
       auth: {
         creds: state.creds,
@@ -34,7 +34,9 @@ class StartConnection {
     });
   }
   async run() {
-    await pairingCode(this.sock, db.config.pairingNumber)
+    if (!this.sock.authState.creds.registered) {
+      await pairingCode(this.sock, db.config.pairingNumber)
+    }
     store.bind(this.sock.ev)
     this.sock.ev.process(async (events) => {
       if (events["connection.update"]) {

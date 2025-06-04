@@ -1,7 +1,7 @@
 {
-  "name": "base",
+  "name": "whatsapp-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple whatsapp-bot",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -9,24 +9,16 @@
     "start": "node --max-old-space-size=40960 index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Agus Irawan",
   "license": "ISC",
   "dependencies": {
-    "@whiskeysockets/baileys": "6.6.0",
+    "@whiskeysockets/baileys": "npm:@fizzxydev/baileys-pro@^8.7.2",
     "axios": "^1.6.8",
     "cheerio": "^1.0.0",
     "crypto": "^1.0.1",
-    "deobfuscator": "^2.4.5",
-    "escodegen": "^2.1.0",
-    "esprima": "^4.0.1",
     "express": "^4.19.2",
-    "javascript-deob": "^1.0.1-beta",
-    "javascript-deobfuscator": "^1.0.3",
-    "jimp": "^0.16.13",
     "natural": "^7.0.5",
     "node-fetch": "^3.3.2",
-    "qrcode": "^1.5.4",
-    "razzaqjs": "^1.0.6",
     "request": "^2.88.2",
     "uglify-js": "^3.19.0"
   }
