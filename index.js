@@ -18,12 +18,13 @@ import { pairingCode } from "./lib/pairing.js";
 import { database } from "./database/database.js";
 database.initDatabase()
 let db = database.data
+const pairingNumber = "Your Number to connect"
 
 class StartConnection {
   constructor() {
     this.sock = makeWASocket({
       printQRInTerminal: false,
-      logger: logger,
+      logger,
       browser: Browsers.macOS("Chrome"),
       auth: {
         creds: state.creds,
@@ -35,7 +36,7 @@ class StartConnection {
   }
   async run() {
     if (!this.sock.authState.creds.registered) {
-      await pairingCode(this.sock, db.config.pairingNumber)
+      await pairingCode(this.sock, pairingNumber)
     }
     store.bind(this.sock.ev)
     this.sock.ev.process(async (events) => {
